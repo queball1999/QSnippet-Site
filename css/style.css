@@ -194,7 +194,7 @@ nav a:hover {
   align-items: center;
 }
 
-.showcase img {
+.showcase video {
   width: 100%;
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -311,7 +311,7 @@ nav a:hover {
     margin-top: 1.5rem;
   }
 
-  .showcase img {
+  .showcase video {
     max-width: 100%;
   }
 }
