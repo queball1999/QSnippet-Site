@@ -53,6 +53,16 @@ nav a:hover {
   color: var(--text);
 }
 
+.notice {
+  background: #ffcc00;
+  color: #000;
+  text-align: center;
+  padding: 2px 5px;
+  font-size: small;
+  font-weight: 600;
+  height: auto;
+}
+
 .logo {
   display: flex;
   gap: 0.5rem;
