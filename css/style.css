@@ -303,6 +303,89 @@ nav a:hover {
   text-decoration: underline;
 }
 
+/* Search Input */
+.downloads-search {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.downloads-search::placeholder {
+  color: var(--muted);
+}
+
+.downloads-search:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(151, 0, 0, 0.1);
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.pagination-btn {
+  padding: 0.65rem 1.25rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  scale: 1.02;
+  box-shadow: 0 8px 24px rgba(79, 140, 255, 0.25), 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  color: var(--muted);
+  font-size: 0.9rem;
+  min-width: 120px;
+  text-align: center;
+}
+
+.pagination-select {
+  padding: 0.65rem 1rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pagination-select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(151, 0, 0, 0.1);
+}
+
+.pagination-select option {
+  background: var(--panel);
+  color: var(--text);
+}
+
 /* Footer */
 .footer {
   padding: 2rem;
