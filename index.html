@@ -173,7 +173,17 @@
     <h2>Downloads</h2>
     <p>All releases are hosted on GitHub. Downloads are fetched directly from official release assets.</p>
 
-    <input type="text" id="release-search" class="downloads-search" placeholder="Search releases...">
+    <div class="downloads-toolbar">
+      <input type="text" id="release-search" class="downloads-search" placeholder="Search releases...">
+
+      <label id="channel-select-wrap" class="channel-select-wrap" title="Dev builds are pre-release test versions and may be unstable.">
+        <span class="channel-select-label">Channel</span>
+        <select id="channel-select" class="channel-select">
+          <option value="main" selected>Main (stable)</option>
+          <option value="dev">Dev (pre-release)</option>
+        </select>
+      </label>
+    </div>
 
     <div id="releases">
       <p class="loading">Loading releases…</p>

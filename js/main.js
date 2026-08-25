@@ -19,16 +19,57 @@ let pageSize = 5;
 const releasesContainer = document.getElementById("releases");
 const searchInput = document.getElementById("release-search");
 const paginationContainer = document.getElementById("pagination");
+const channelSelect = document.getElementById("channel-select");
 
-/* Get filtered releases based on search query */
+/* Release channel
+ *
+ * QSnippet CI publishes two kinds of GitHub Release: a "-release" tag,
+ * built from main, marked prerelease:false, and a "-dev" tag, built from
+ * any branch for early testing, marked prerelease:true. The GitHub API
+ * carries that distinction on each release object as release.prerelease,
+ * so no separate feed or naming convention is needed here - the same
+ * boolean CI sets is exactly what this filters on.
+ *
+ * Defaults to "main" and is remembered per-visitor via localStorage, so a
+ * visitor who has never opted in only ever sees stable releases, and one
+ * who has opted into dev builds does not have to reselect it every visit.
+ */
+const CHANNEL_STORAGE_KEY = "qsnippet-release-channel";
+
+function loadChannelPreference() {
+  try {
+    const stored = localStorage.getItem(CHANNEL_STORAGE_KEY);
+    return stored === "dev" ? "dev" : "main";
+  } catch (err) {
+    // Private browsing / storage disabled: fall back to the safe default.
+    return "main";
+  }
+}
+
+function saveChannelPreference(channel) {
+  try {
+    localStorage.setItem(CHANNEL_STORAGE_KEY, channel);
+  } catch (err) {
+    // Non-fatal: the selection still applies for this page view.
+  }
+}
+
+channelSelect.value = loadChannelPreference();
+
+/* Get filtered releases based on the selected channel and search query */
 function getFilteredReleases() {
   const query = searchInput.value.toLowerCase();
+  const channel = channelSelect.value;
+
+  const inChannel = allReleases.filter(release =>
+    channel === "dev" ? true : !release.prerelease
+  );
 
   if (!query) {
-    return allReleases;
+    return inChannel;
   }
 
-  return allReleases.filter(release => {
+  return inChannel.filter(release => {
     // Match version/tag name
     const tagMatch = (release.name || release.tag_name).toLowerCase().includes(query);
 
@@ -160,6 +201,13 @@ function renderPagination(totalReleases) {
 
 /* Search event listener */
 searchInput.addEventListener("input", () => {
+  currentPage = 1;
+  renderReleases();
+});
+
+/* Channel event listener */
+channelSelect.addEventListener("change", () => {
+  saveChannelPreference(channelSelect.value);
   currentPage = 1;
   renderReleases();
 });
